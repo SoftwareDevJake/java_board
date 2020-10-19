@@ -10,10 +10,6 @@ public class java_board {
 
 		ArrayList<String> titles = new ArrayList<>();
 		ArrayList<String> bodies = new ArrayList<>();
-//		String[] titles = new String[3];
-//		String[] bodies = new String[3];
-
-		int size = 0;
 
 		while (true) {
 			System.out.print("명령어 입력 : ");
@@ -29,11 +25,10 @@ public class java_board {
 				System.out.println("게시물 내용을 입력해주세요 :");
 				bodies.add(sc.next());
 				System.out.println("게시물이 등록되었습니다.");
-				size++;
 
 			}
 			if (cmd.equals("list")) {
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; i < titles.size(); i++) {
 					System.out.println("제목 : " + titles.get(i));
 					System.out.println("내용 : " + bodies.get(i));
 					System.out.println("======================");
