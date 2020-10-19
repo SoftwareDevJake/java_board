@@ -8,6 +8,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
+		ArrayList list = new ArrayList();
 		boolean loop = true;
 		Add a = new Add();
 		
@@ -25,6 +26,7 @@ public class Test {
 			
 			else if(s.equals("list"))
 			{
+					
 				System.out.println("제목 : " + a.title);
 				System.out.println("내용 : " + a.body);
 			}
@@ -74,7 +76,7 @@ class Add {
 }
 
 class List {
-	ArrayList list = new ArrayList();
+	
 	
 	void show_list()
 	{

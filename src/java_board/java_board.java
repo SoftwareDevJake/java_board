@@ -1,10 +1,44 @@
 package java_board;
 
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class java_board {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("this is freaking hard ugh");
-	}
+		Scanner sc = new Scanner(System.in);
 
+//		ArrayList<String> titles = new ArrayList<>();
+		String[] titles = new String[10];
+		String[] bodies = new String[10];
+
+		int size = 0;
+
+		while (true) {
+			System.out.print("명령어 입력 : ");
+			String cmd = sc.next();
+			if (cmd.equals("exit")) {
+				System.out.println("종료");
+				break;
+			}
+			if (cmd.equals("add")) {
+
+				System.out.println("게시물 제목을 입력해주세요 :");
+				titles[size] = sc.next();
+				System.out.println("게시물 내용을 입력해주세요 :");
+				bodies[size] = sc.next();
+				System.out.println("게시물이 등록되었습니다.");
+				size++;
+
+			}
+			if (cmd.equals("list")) {
+				for (int i = 0; i < size; i++) {
+					System.out.println("제목 : " + titles[i]);
+					System.out.println("내용 : " + bodies[i]);
+					System.out.println("======================");
+				}
+			}
+		}
+
+	}
 }
