@@ -2,22 +2,25 @@ package java_board;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Test {
 	static ArrayList<Article> articles;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		LocalDate date = LocalDate.now();
 
 		articles = new ArrayList<>();
 
-		Article a1 = new Article(1, "제목1", "내용1");
-		Article a2 = new Article(2, "제목2", "내용2");
-		Article a3 = new Article(3, "제목3", "내용3");
+		Article a1 = new Article(1, "제목1", "내용1", "익명", 0, date);
+		Article a2 = new Article(2, "제목2", "내용2", "익명", 0, date);
+		Article a3 = new Article(3, "제목3", "내용3", "익명", 0, date);
 
 		articles.add(a1);
 		articles.add(a2);
 		articles.add(a3);
+		
 
 		int no = 4;
 
@@ -40,6 +43,7 @@ public class Test {
 
 				System.out.println("게시물 제목을 입력해주세요 :");
 				String title = sc.next();
+				
 
 				a.setTitle(title);
 				;
@@ -58,13 +62,16 @@ public class Test {
 					Article article = articles.get(i);
 					System.out.println("번호 : " + article.getId());
 					System.out.println("제목 : " + article.getTitle());
+					System.out.println("작성자 : " + article.getWriter());
+					System.out.println("등록날짜 : " + article.getDate());
+					System.out.println("조회수 : " + article.getView());
 //					System.out.println("내용 : " + article.getBody());
-					System.out.println("===================");
+					System.out.println("====================");
 				}
 			}
 
 			if (cmd.equals("update")) {
-				// index 버전
+				// index ver.
 //				System.out.println("수정할 게시물 선택 : ");
 //				int targetId = sc.nextInt();
 //				int index = getArticleIndexById(targetId);
@@ -91,6 +98,8 @@ public class Test {
 //					articles.set(i, newArticle);
 //					break;
 //				}
+				
+//				Article ver.
 				System.out.println("수정할 게시물 선택 : ");
 				int targetId = sc.nextInt();
 				Article target = getArticleById(targetId);
@@ -111,7 +120,6 @@ public class Test {
 					target.setTitle(newTitle);
 					target.setBody(newBody);
 
-					break;
 				}
 
 			}
@@ -144,16 +152,21 @@ public class Test {
 				
 				else
 				{
-					System.out.println("====" + articles.get(i).getId() + "번 게시물" + "====");
-					System.out.println("번호 : " + articles.get(i).getId());
-					System.out.println("제목 : " + articles.get(i).getTitle());
-					System.out.println("내용 : " + articles.get(i).getBody());
+					target.setView(target.getView()+1);
+					
+					System.out.println("====" + articles.get(targetId-1).getId() + "번 게시물" + "====");
+					System.out.println("번호 : " + articles.get(targetId-1).getId());
+					System.out.println("제목 : " + articles.get(targetId-1).getTitle());
+					System.out.println("내용 : " + articles.get(targetId-1).getBody());
 					System.out.println("==================");
+					
 				}	
 			}
+			
+			
 		}
 	}
-	// index 버전
+	// index ver.
 	private static int getArticleIndexById(int targetId) {
 		for (int i = 0; i < articles.size(); i++) {
 			int id = articles.get(i).getId();
@@ -164,7 +177,7 @@ public class Test {
 		return -1;
 	}
 
-	// Article 버전
+	// Article ver.
 	private static Article getArticleById(int targetId) {
 		for (int i = 0; i < articles.size(); i++) {
 			int id = articles.get(i).getId();
