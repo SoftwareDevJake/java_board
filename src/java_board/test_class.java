@@ -12,7 +12,5 @@ public class test_class {
 		LocalDateTime now2 = LocalDateTime.now();
 		System.out.println(now2);
 		
-		
-		
 	}
 }

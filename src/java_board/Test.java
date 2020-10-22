@@ -9,13 +9,12 @@ public class Test {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		LocalDate date = LocalDate.now();
 
 		articles = new ArrayList<>();
 
-		Article a1 = new Article(1, "제목1", "내용1", "익명", 0, date);
-		Article a2 = new Article(2, "제목2", "내용2", "익명", 0, date);
-		Article a3 = new Article(3, "제목3", "내용3", "익명", 0, date);
+		Article a1 = new Article(1, "제목1", "내용1", "익명", 0, getCurrentDate());
+		Article a2 = new Article(2, "제목2", "내용2", "익명", 0, getCurrentDate());
+		Article a3 = new Article(3, "제목3", "내용3", "익명", 0, getCurrentDate());
 
 		articles.add(a1);
 		articles.add(a2);
@@ -51,6 +50,10 @@ public class Test {
 				String body = sc.next();
 
 				a.setBody(body);
+				
+				a.setDate(getCurrentDate());
+				
+				a.setWriter("익명");
 
 				articles.add(a);
 				System.out.println("게시물이 등록되었습니다.");
@@ -154,10 +157,10 @@ public class Test {
 				{
 					target.setView(target.getView()+1);
 					
-					System.out.println("====" + articles.get(targetId-1).getId() + "번 게시물" + "====");
-					System.out.println("번호 : " + articles.get(targetId-1).getId());
-					System.out.println("제목 : " + articles.get(targetId-1).getTitle());
-					System.out.println("내용 : " + articles.get(targetId-1).getBody());
+					System.out.println("====" + target.getId() + "번 게시물" + "====");
+					System.out.println("번호 : " + target.getId());
+					System.out.println("제목 : " + target.getTitle());
+					System.out.println("내용 : " + target.getBody());
 					System.out.println("==================");
 					
 				}	
@@ -166,16 +169,16 @@ public class Test {
 			
 		}
 	}
-	// index ver.
-	private static int getArticleIndexById(int targetId) {
-		for (int i = 0; i < articles.size(); i++) {
-			int id = articles.get(i).getId();
-			if (id == targetId) {
-				return i;
-			}
-		}
-		return -1;
-	}
+//	index ver.
+//	private static int getArticleIndexById(int targetId) {
+//		for (int i = 0; i < articles.size(); i++) {
+//			int id = articles.get(i).getId();
+//			if (id == targetId) {
+//				return i;
+//			}
+//		}
+//		return -1;
+//	}
 
 	// Article ver.
 	private static Article getArticleById(int targetId) {
@@ -186,5 +189,11 @@ public class Test {
 			}
 		}
 		return null;
+	}
+	
+	private static Object getCurrentDate() {
+		LocalDate date = LocalDate.now();
+	
+		return date;
 	}
 }
