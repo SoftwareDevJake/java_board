@@ -12,5 +12,13 @@ public class test_class {
 		LocalDateTime now2 = LocalDateTime.now();
 		System.out.println(now2);
 		
+		String name = "what do you know about me?";
+		
+		System.out.println(name.contains("do you know"));
+		System.out.println("about");
+		System.out.println("hello");
+		
+		System.out.println(name);
+		
 	}
 }

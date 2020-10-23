@@ -1,5 +1,7 @@
 package java_board;
 
+import java.util.ArrayList;
+
 public class Article {
 
 	private int id;
@@ -72,4 +74,9 @@ public class Article {
 	public void setDate(Object date) {
 		this.date = date;
 	}
+
+	public boolean contains(String keyword) {
+		return title.contains(keyword);
+	}
+	
 }
