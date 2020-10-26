@@ -131,12 +131,12 @@ public class Test {
 							
 						}
 						
-						if(choice == 2) // 좋아요
+						else if(choice == 2) // 좋아요
 						{
 							System.out.println("[좋아요 기능]");
 						}
 						
-						if(choice == 3) // 수정
+						else if(choice == 3) // 수정
 						{
 							System.out.println("수정할 제목을 입력해주세요");
 							String newTitle = sc.next();
@@ -147,14 +147,14 @@ public class Test {
 							target.setBody(newBody);	
 						}
 						
-						if(choice == 4) // 삭제
+						else if(choice == 4) // 삭제
 						{
 							dao.removeArticle(target);
 							System.out.println("삭제되었습니다.");
 							break;
 						}
 						
-						if(choice == 5) // 뒤로가기
+						else if(choice == 5) // 뒤로가기
 						{
 							break;
 						}
@@ -168,13 +168,14 @@ public class Test {
 				System.out.println("검색 항목을 선택해주세요");
 				System.out.println("1. 제목, 2. 내용, 3. 제목 + 내용, 4. 작성자");
 				int choice = sc.nextInt();
+				ArrayList<Article> searchedArticles;
 				
 				if(choice == 1)
 				{
 					System.out.println("검색할 제목 키워드를 입력해주세요.");
 					String keyword = sc.next();
 					
-					ArrayList<Article> searchedArticles = dao.getSearchedArticlesByTitle(keyword);
+					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
 					
 					dao.displayArticles(searchedArticles);
 				}
@@ -184,7 +185,7 @@ public class Test {
 					System.out.println("검색할 내용 키워드를 입력해주세요.");
 					String keyword = sc.next();
 					
-					ArrayList<Article> searchedArticles = dao.getSearchedArticlesByBody(keyword);
+					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
 					
 					dao.displayArticles(searchedArticles);
 				}
@@ -194,9 +195,9 @@ public class Test {
 					System.out.println("검색할 제목과 내용 키워드를 입력해주세요");
 					String keyword = sc.next();
 					
-					ArrayList<Article> searchedArticlesByTitleAndBody = dao.getSearchedArticlesByTitleAndBody(keyword);
+					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
 			
-					dao.displayArticles(searchedArticlesByTitleAndBody);
+					dao.displayArticles(searchedArticles);
 					
 				}
 				
@@ -205,9 +206,9 @@ public class Test {
 					System.out.println("검색할 작성자 키워드를 입력해주세요");
 					String keyword = sc.next();
 					
-					ArrayList<Article> searchedArticlesByWriter = dao.getSearchedByWriter(keyword);
+					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
 					
-					dao.displayArticles(searchedArticlesByWriter);
+					dao.displayArticles(searchedArticles);
 				}
 				
 				

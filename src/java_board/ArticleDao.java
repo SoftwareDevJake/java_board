@@ -56,13 +56,33 @@ public class ArticleDao {
 		return articles;
 	}
 	
-	public ArrayList<Article> getSearchedArticlesByTitle(String keyword)
+	public ArrayList<Article> getSearchedArticlesByTitle(int choice, String keyword)
 	{
 		ArrayList<Article> searchedArticles = new ArrayList<>();
 		for(int i = 0; i < articles.size(); i++)
 		{
 			Article article = articles.get(i);
-			String str = article.getTitle(); // 각 게시물 제목
+			String str = "";
+			if(choice == 1)
+			{
+				str = article.getTitle();
+			}
+			
+			else if(choice == 2)
+			{
+				str = article.getBody();
+			}
+			
+			else if(choice == 3)
+			{
+				str = article.getTitle() + article.getBody();
+			}
+			
+			else if(choice == 4)
+			{
+				str = article.getWriter();
+			}
+			
 			if (str.contains(keyword))
 			{
 				searchedArticles.add(article);
@@ -72,55 +92,55 @@ public class ArticleDao {
 		return searchedArticles;
 	}
 	
-	public ArrayList<Article> getSearchedArticlesByBody(String keyword)
-	{
-		ArrayList<Article> searchedArticles = new ArrayList<>();
-		for(int i = 0; i < articles.size(); i++)
-		{
-			Article article = articles.get(i);
-			String str = article.getBody(); // 각 게시물 내용
-			if( str.contains(keyword))
-			{
-				searchedArticles.add(article);
-			}
-		}
-		return searchedArticles;
-	}
-	
-	public ArrayList<Article> getSearchedArticlesByTitleAndBody(String keyword)
-	{
-		ArrayList<Article> searchedArticles = new ArrayList<>();
-		
-		for(int i = 0; i < articles.size(); i++)
-		{
-			Article article = articles.get(i);
-			String title = article.getTitle();
-			String body = article.getBody();
-			if(title.contains(keyword) || body.contains(keyword))
-			{
-				searchedArticles.add(article);
-			}
-		}
-		
-		return searchedArticles;
-	}
-	
-	public ArrayList<Article> getSearchedByWriter(String keyword)
-	{
-		ArrayList<Article> searchedArticles = new ArrayList<>();
-		
-		for(int i = 0; i < articles.size(); i++)
-		{
-			Article article = articles.get(i);
-			String Writer = article.getWriter();
-			if(Writer.contains(keyword))
-			{
-				searchedArticles.add(article);
-			}
-		}
-		
-		return searchedArticles;
-	}
+//	public ArrayList<Article> getSearchedArticlesByBody(String keyword)
+//	{
+//		ArrayList<Article> searchedArticles = new ArrayList<>();
+//		for(int i = 0; i < articles.size(); i++)
+//		{
+//			Article article = articles.get(i);
+//			String str = article.getBody(); // 각 게시물 내용
+//			if( str.contains(keyword))
+//			{
+//				searchedArticles.add(article);
+//			}
+//		}
+//		return searchedArticles;
+//	}
+//	
+//	public ArrayList<Article> getSearchedArticlesByTitleAndBody(String keyword)
+//	{
+//		ArrayList<Article> searchedArticles = new ArrayList<>();
+//		
+//		for(int i = 0; i < articles.size(); i++)
+//		{
+//			Article article = articles.get(i);
+//			String title = article.getTitle();
+//			String body = article.getBody();
+//			if(title.contains(keyword) || body.contains(keyword))
+//			{
+//				searchedArticles.add(article);
+//			}
+//		}
+//		
+//		return searchedArticles;
+//	}
+//	
+//	public ArrayList<Article> getSearchedByWriter(String keyword)
+//	{
+//		ArrayList<Article> searchedArticles = new ArrayList<>();
+//		
+//		for(int i = 0; i < articles.size(); i++)
+//		{
+//			Article article = articles.get(i);
+//			String Writer = article.getWriter();
+//			if(Writer.contains(keyword))
+//			{
+//				searchedArticles.add(article);
+//			}
+//		}
+//		
+//		return searchedArticles;
+//	}
 	
 	public void displayArticles(ArrayList<Article> searchedArticles)
 	{
