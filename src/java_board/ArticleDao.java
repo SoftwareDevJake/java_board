@@ -122,7 +122,19 @@ public class ArticleDao {
 		return searchedArticles;
 	}
 	
-	
+	public void displayArticles(ArrayList<Article> searchedArticles)
+	{
+		for(int i = 0; i < searchedArticles.size(); i++)
+		{
+			Article article = searchedArticles.get(i);
+			System.out.println("번호 : " + article.getId());
+			System.out.println("제목 : " + article.getTitle());
+			System.out.println("작성자 : " + article.getWriter());
+			System.out.println("등록날짜 : " + article.getDate());
+			System.out.println("조회수 : " + article.getView());
+			System.out.println("====================");
+		}
+	}
 }
 
 	

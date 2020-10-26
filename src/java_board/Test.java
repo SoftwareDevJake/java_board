@@ -176,15 +176,7 @@ public class Test {
 					
 					ArrayList<Article> searchedArticles = dao.getSearchedArticlesByTitle(keyword);
 					
-					for (int i = 0; i < searchedArticles.size(); i++) {
-						Article article = searchedArticles.get(i);
-						System.out.println("번호 : " + article.getId());
-						System.out.println("제목 : " + article.getTitle());
-						System.out.println("작성자 : " + article.getWriter());
-						System.out.println("등록날짜 : " + article.getDate());
-						System.out.println("조회수 : " + article.getView());
-						System.out.println("====================");
-					}
+					dao.displayArticles(searchedArticles);
 				}
 				
 				if(choice == 2)
@@ -194,17 +186,7 @@ public class Test {
 					
 					ArrayList<Article> searchedArticles = dao.getSearchedArticlesByBody(keyword);
 					
-					for(int i = 0; i < searchedArticles.size(); i++)
-					{
-						Article article = searchedArticles.get(i);
-						System.out.println("번호 : " + article.getId());
-						System.out.println("제목 : " + article.getTitle());
-						System.out.println("내용 : " + article.getBody());
-						System.out.println("작성자 : " + article.getWriter());
-						System.out.println("등록날짜 : " + article.getDate());
-						System.out.println("조회수 : " + article.getView());
-						System.out.println("====================");
-					}
+					dao.displayArticles(searchedArticles);
 				}
 				
 				if(choice == 3)
@@ -213,19 +195,8 @@ public class Test {
 					String keyword = sc.next();
 					
 					ArrayList<Article> searchedArticlesByTitleAndBody = dao.getSearchedArticlesByTitleAndBody(keyword);
-					System.out.println(searchedArticlesByTitleAndBody.size());
-					for(int i = 0; i < searchedArticlesByTitleAndBody.size(); i++)
-					{
-						Article article = searchedArticlesByTitleAndBody.get(i);
-						System.out.println("번호 : " + article.getId());
-						System.out.println("제목 : " + article.getTitle());
-						System.out.println("내용 : " + article.getBody());
-						System.out.println("작성자 : " + article.getWriter());
-						System.out.println("등록날짜 : " + article.getDate());
-						System.out.println("조회수 : " + article.getView());
-						System.out.println("====================");
-						
-					}
+			
+					dao.displayArticles(searchedArticlesByTitleAndBody);
 					
 				}
 				
@@ -236,17 +207,7 @@ public class Test {
 					
 					ArrayList<Article> searchedArticlesByWriter = dao.getSearchedByWriter(keyword);
 					
-					for(int i = 0; i <searchedArticlesByWriter.size(); i++)
-					{
-						Article article = searchedArticlesByWriter.get(i);
-						System.out.println("번호 : " + article.getId());
-						System.out.println("제목 : " + article.getTitle());
-						System.out.println("내용 : " + article.getBody());
-						System.out.println("작성자 : " + article.getWriter());
-						System.out.println("등록날짜 : " + article.getDate());
-						System.out.println("조회수 : " + article.getView());
-						System.out.println("====================");
-					}
+					dao.displayArticles(searchedArticlesByWriter);
 				}
 				
 				
