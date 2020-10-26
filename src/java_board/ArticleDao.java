@@ -72,4 +72,57 @@ public class ArticleDao {
 		return searchedArticles;
 	}
 	
+	public ArrayList<Article> getSearchedArticlesByBody(String keyword)
+	{
+		ArrayList<Article> searchedArticles = new ArrayList<>();
+		for(int i = 0; i < articles.size(); i++)
+		{
+			Article article = articles.get(i);
+			String str = article.getBody(); // 각 게시물 내용
+			if( str.contains(keyword))
+			{
+				searchedArticles.add(article);
+			}
+		}
+		return searchedArticles;
+	}
+	
+	public ArrayList<Article> getSearchedArticlesByTitleAndBody(String keyword)
+	{
+		ArrayList<Article> searchedArticles = new ArrayList<>();
+		
+		for(int i = 0; i < articles.size(); i++)
+		{
+			Article article = articles.get(i);
+			String title = article.getTitle();
+			String body = article.getBody();
+			if(title.contains(keyword) || body.contains(keyword))
+			{
+				searchedArticles.add(article);
+			}
+		}
+		
+		return searchedArticles;
+	}
+	
+	public ArrayList<Article> getSearchedByWriter(String keyword)
+	{
+		ArrayList<Article> searchedArticles = new ArrayList<>();
+		
+		for(int i = 0; i < articles.size(); i++)
+		{
+			Article article = articles.get(i);
+			String Writer = article.getWriter();
+			if(Writer.contains(keyword))
+			{
+				searchedArticles.add(article);
+			}
+		}
+		
+		return searchedArticles;
+	}
+	
+	
 }
+
+	
