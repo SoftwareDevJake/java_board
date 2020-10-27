@@ -9,6 +9,7 @@ public class Test {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		ArticleDao dao = new ArticleDao();
+		CommentDao c_dao = new CommentDao();
 
 		while (true) {
 
@@ -27,7 +28,7 @@ public class Test {
 				String title = sc.next();
 
 				a.setTitle(title);
-				;
+				
 				System.out.println("게시물 내용을 입력해주세요 :");
 				String body = sc.next();
 
@@ -103,10 +104,10 @@ public class Test {
 				System.out.println("몇번 째 게시물을 보시겠습니까?");
 				int targetId = sc.nextInt();
 				Article target = dao.getArticleById(targetId);
+				ArrayList<Comment> commentArray = c_dao.getComments();
 
 				if (target == null) {
 					System.out.println("게시물이 존재하지 않습니다.");
-					break;
 				}
 
 				else {
@@ -117,6 +118,7 @@ public class Test {
 					System.out.println("제목 : " + target.getTitle());
 					System.out.println("내용 : " + target.getBody());
 					System.out.println("==================");
+					c_dao.displayComments(commentArray);
 
 					while(true)
 					{
@@ -127,8 +129,20 @@ public class Test {
 						
 						if(choice == 1) // 댓글 등록
 						{
-							System.out.println("[댓글 기능]");
+							Comment c = new Comment();
 							
+							System.out.println("댓글 내용을 입력해주세요 : ");
+							sc.nextLine();
+							String comment = sc.nextLine();
+							c.setComment(comment);
+							c.setWriter("익명");
+							
+							c_dao.insertComment(c);
+							
+							System.out.println("댓글이 등록 되었습니다.");
+							
+							dao.displayArticle(target);
+							c_dao.displayComments(commentArray);
 						}
 						
 						else if(choice == 2) // 좋아요
@@ -175,7 +189,7 @@ public class Test {
 					System.out.println("검색할 제목 키워드를 입력해주세요.");
 					String keyword = sc.next();
 					
-					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
+					searchedArticles = dao.getSearchedArticlesByChoice(choice, keyword);
 					
 					dao.displayArticles(searchedArticles);
 				}
@@ -185,7 +199,7 @@ public class Test {
 					System.out.println("검색할 내용 키워드를 입력해주세요.");
 					String keyword = sc.next();
 					
-					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
+					searchedArticles = dao.getSearchedArticlesByChoice(choice, keyword);
 					
 					dao.displayArticles(searchedArticles);
 				}
@@ -195,7 +209,7 @@ public class Test {
 					System.out.println("검색할 제목과 내용 키워드를 입력해주세요");
 					String keyword = sc.next();
 					
-					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
+					searchedArticles = dao.getSearchedArticlesByChoice(choice, keyword);
 			
 					dao.displayArticles(searchedArticles);
 					
@@ -206,7 +220,7 @@ public class Test {
 					System.out.println("검색할 작성자 키워드를 입력해주세요");
 					String keyword = sc.next();
 					
-					searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
+					searchedArticles = dao.getSearchedArticlesByChoice(choice, keyword);
 					
 					dao.displayArticles(searchedArticles);
 				}

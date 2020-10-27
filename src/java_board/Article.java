@@ -79,47 +79,29 @@ public class Article {
 		return title.contains(keyword);
 	}
 	
-//	public String getPropertiesByChoice(int choice, ArrayList<Article> searchedArticles) {
-//		String str = "";
-//		if(choice == 1)
-//		{
-//			System.out.println("검색할 제목 키워드를 입력해주세요.");
-//			String keyword = sc.next();
-//			
-//			searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
-//			
-//			dao.displayArticles(searchedArticles);
-//		}
-//		
-//		if(choice == 2)
-//		{
-//			System.out.println("검색할 내용 키워드를 입력해주세요.");
-//			String keyword = sc.next();
-//			
-//			searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
-//			
-//			dao.displayArticles(searchedArticles);
-//		}
-//		
-//		if(choice == 3)
-//		{
-//			System.out.println("검색할 제목과 내용 키워드를 입력해주세요");
-//			String keyword = sc.next();
-//			
-//			searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
-//	
-//			dao.displayArticles(searchedArticles);
-//			
-//		}
-//		
-//		if(choice == 4)
-//		{
-//			System.out.println("검색할 작성자 키워드를 입력해주세요");
-//			String keyword = sc.next();
-//			
-//			searchedArticles = dao.getSearchedArticlesByTitle(choice, keyword);
-//			
-//			dao.displayArticles(searchedArticles);
-//		}
-//	}
+	public String getPropertiesByChoice(int choice) {
+		String str = "";
+		if(choice == 1)
+		{
+			str = this.getTitle();
+		}
+		
+		if(choice == 2)
+		{
+			str = this.getBody();
+		}
+		
+		if(choice == 3)
+		{
+			str = this.getTitle() + this.getBody();
+			
+		}
+		
+		if(choice == 4)
+		{
+			str = this.getWriter();
+		}
+		
+		return str;
+	}
 }

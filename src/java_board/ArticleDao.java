@@ -56,39 +56,21 @@ public class ArticleDao {
 		return articles;
 	}
 	
-	public ArrayList<Article> getSearchedArticlesByTitle(int choice, String keyword)
+	public ArrayList<Article> getSearchedArticlesByChoice(int choice, String keyword)
 	{
 		ArrayList<Article> searchedArticles = new ArrayList<>();
 		for(int i = 0; i < articles.size(); i++)
 		{
 			Article article = articles.get(i);
-			String str = "";
-			if(choice == 1)
-			{
-				str = article.getTitle();
-			}
+			String str = article.getPropertiesByChoice(choice);
 			
-			else if(choice == 2)
-			{
-				str = article.getBody();
-			}
-			
-			else if(choice == 3)
-			{
-				str = article.getTitle() + article.getBody();
-			}
-			
-			else if(choice == 4)
-			{
-				str = article.getWriter();
-			}
-			
-			if (str.contains(keyword))
+			if(str.contains(keyword))
 			{
 				searchedArticles.add(article);
 			}
-		}
 		
+		}
+					
 		return searchedArticles;
 	}
 	
@@ -141,7 +123,7 @@ public class ArticleDao {
 //		
 //		return searchedArticles;
 //	}
-	
+//	
 	public void displayArticles(ArrayList<Article> searchedArticles)
 	{
 		for(int i = 0; i < searchedArticles.size(); i++)
@@ -155,6 +137,18 @@ public class ArticleDao {
 			System.out.println("====================");
 		}
 	}
+	
+	public void displayArticle(Article targetArticle)
+	{
+		
+		System.out.println("번호 : " + targetArticle.getId());
+		System.out.println("제목 : " + targetArticle.getTitle());
+		System.out.println("작성자 : " + targetArticle.getWriter());
+		System.out.println("등록날짜 : " + targetArticle.getDate());
+		System.out.println("조회수 : " + targetArticle.getView());
+		System.out.println("====================");
+	}
+	
 }
 
 	
