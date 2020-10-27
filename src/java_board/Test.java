@@ -103,8 +103,10 @@ public class Test {
 
 				System.out.println("몇번 째 게시물을 보시겠습니까?");
 				int targetId = sc.nextInt();
+				
 				Article target = dao.getArticleById(targetId);
 				ArrayList<Comment> commentArray = c_dao.getComments();
+				
 
 				if (target == null) {
 					System.out.println("게시물이 존재하지 않습니다.");
@@ -118,6 +120,7 @@ public class Test {
 					System.out.println("제목 : " + target.getTitle());
 					System.out.println("내용 : " + target.getBody());
 					System.out.println("==================");
+					System.out.println("========댓글========");
 					c_dao.displayComments(commentArray);
 
 					while(true)
@@ -134,6 +137,8 @@ public class Test {
 							System.out.println("댓글 내용을 입력해주세요 : ");
 							sc.nextLine();
 							String comment = sc.nextLine();
+							
+							c.setParentId(target);
 							c.setComment(comment);
 							c.setWriter("익명");
 							
@@ -141,7 +146,7 @@ public class Test {
 							
 							System.out.println("댓글이 등록 되었습니다.");
 							
-							dao.displayArticle(target);
+							dao.displayAnArticle(target);
 							c_dao.displayComments(commentArray);
 						}
 						
@@ -171,6 +176,11 @@ public class Test {
 						else if(choice == 5) // 뒤로가기
 						{
 							break;
+						}
+						
+						else
+						{
+							
 						}
 						
 					}

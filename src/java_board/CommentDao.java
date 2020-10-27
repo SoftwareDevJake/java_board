@@ -40,15 +40,30 @@ public class CommentDao {
 		return comments;
 	}
 	
+	public ArrayList<Comment> getCommentsByParentId(int parentId)
+	{
+		ArrayList<Comment> searchedComments = new ArrayList<>();
+		
+		for(int i = 0 ; i < searchedComments.size(); i++)
+		{
+			Comment comment = comments.get(i);
+			
+			searchedComments.add(comment);
+			
+		}
+		
+		return comments;
+	}
+	
 	public void displayComments(ArrayList<Comment> searchedComments)
 	{
 		for(int i = 0; i < searchedComments.size(); i++)
 		{
 			Comment comment = searchedComments.get(i);
-			System.out.println("====댓글====");
 			System.out.println("내용 : " + comment.getComment());
 			System.out.println("작성자 : " + comment.getWriter());
 			System.out.println("등록날짜 : " + comment.getDate());
+			System.out.println("===============");
 		}
 	}
 }

@@ -124,7 +124,7 @@ public class ArticleDao {
 //		return searchedArticles;
 //	}
 //	
-	public void displayArticles(ArrayList<Article> searchedArticles)
+	public void displayArticles(ArrayList<Article> searchedArticles) // 전체출력
 	{
 		for(int i = 0; i < searchedArticles.size(); i++)
 		{
@@ -138,7 +138,7 @@ public class ArticleDao {
 		}
 	}
 	
-	public void displayArticle(Article targetArticle)
+	public void displayAnArticle(Article targetArticle) // 하나출력
 	{
 		
 		System.out.println("번호 : " + targetArticle.getId());
