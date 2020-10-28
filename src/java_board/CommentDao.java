@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CommentDao {
 
-	private static ArrayList<Comment> comments;
+	private ArrayList<Comment> comments;
 	private int no = 1;
 	
 	public CommentDao()
@@ -48,11 +48,13 @@ public class CommentDao {
 		{
 			Comment comment = comments.get(i);
 			
-			searchedComments.add(comment);
-			
+			if(comment.getParentId() == parentId)
+			{
+				searchedComments.add(comment);
+			}
 		}
 		
-		return comments;
+		return searchedComments;
 	}
 	
 	public void displayComments(ArrayList<Comment> searchedComments)

@@ -2,14 +2,16 @@ package java_board;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Test {
-
+	
+	static SignupDao s_dao = new SignupDao();
+	static CommentDao c_dao = new CommentDao();
+	static ArticleDao dao = new ArticleDao();
+	
 	public static void main(String[] args) {
+		
 		Scanner sc = new Scanner(System.in);
-		ArticleDao dao = new ArticleDao();
-		CommentDao c_dao = new CommentDao();
 
 		while (true) {
 
@@ -114,14 +116,10 @@ public class Test {
 
 				else {
 					target.setView(target.getView() + 1);
-
-					System.out.println("====" + target.getId() + "번 게시물" + "====");
-					System.out.println("번호 : " + target.getId());
-					System.out.println("제목 : " + target.getTitle());
-					System.out.println("내용 : " + target.getBody());
-					System.out.println("==================");
-					System.out.println("========댓글========");
-					c_dao.displayComments(commentArray);
+					ArrayList<Comment> cm = c_dao.getCommentsByParentId(targetId);
+					
+					dao.displayAnArticle(target);
+					c_dao.displayComments(cm);
 
 					while(true)
 					{
@@ -138,7 +136,7 @@ public class Test {
 							sc.nextLine();
 							String comment = sc.nextLine();
 							
-							c.setParentId(target);
+							c.setParentId(targetId);
 							c.setComment(comment);
 							c.setWriter("익명");
 							
@@ -147,7 +145,7 @@ public class Test {
 							System.out.println("댓글이 등록 되었습니다.");
 							
 							dao.displayAnArticle(target);
-							c_dao.displayComments(commentArray);
+							c_dao.displayComments(cm);
 						}
 						
 						else if(choice == 2) // 좋아요
@@ -235,7 +233,6 @@ public class Test {
 					dao.displayArticles(searchedArticles);
 				}
 				
-				
 //				ArrayList<Article> target = dao.getArticles();
 //				int check = 1;
 //
@@ -250,9 +247,69 @@ public class Test {
 //				{
 //					System.out.println("검색 결과가 없습니다.");
 //				}
-
 			}
-
+			
+			if(cmd.equals("signup"))
+			{
+				Signup s = new Signup();
+				System.out.println("==== 회원 가입을 진행합니다 ====");
+				System.out.println("아이디를 입력해주세요 : ");
+				String id = sc.next();
+				s.setId(id);
+				
+				System.out.println("비밀번호를 입력해주세요 : ");
+				String password = sc.next();
+				s.setPassword(password);
+				
+				System.out.println("닉네임을 입력해주세요 : ");
+				String nickname = sc.next();
+				s.setNickname(nickname);
+				
+				s_dao.insertSignup(s);
+				
+				System.out.println("==== 회원가입이 완료되었습니다 ====");
+			}
+			
+			if(cmd.equals("signin"))
+			{
+				Signup s = new Signup();
+				ArrayList<Signup> signup = new ArrayList<Signup>();
+				int find_user = 0;
+				
+				System.out.println("아이디를 입력해주세요 : ");
+				String id = sc.next();
+				
+				System.out.println("비밀번호를 입력해주세요 :");
+				String password = sc.next();
+				
+				for(int i = 0; i < signup.size(); i++)
+				{
+					if(id.equals(s_dao.getSignup().get(i).getId()) && password.equals(s_dao.getSignup().get(i).getPassword()))
+					{
+						find_user = i;
+					}
+				}
+				
+				if(id.equals(s_dao.getSignup().get(find_user).getId()) && password.equals(s_dao.getSignup().get(find_user).getPassword()))
+				{
+					System.out.println(s_dao.getSignup().get(find_user).getNickname() + "님 환영합니다!");
+				}
+				else
+				{
+					System.out.println("아이디와 비밀번호를 다시한번 확인해 주십시오.");
+				}
+			}
 		}
 	}
+
+//	private static void displayAnArticle(Article target) {
+//		// TODO Auto-generated method stub
+//		System.out.println("번호 : " + target.getId());
+//		System.out.println("제목 : " + target.getTitle());
+//		System.out.println("작성자 : " + target.getWriter());
+//		System.out.println("등록날짜 : " + target.getDate());
+//		System.out.println("조회수 : " + target.getView());
+//		System.out.println("====================");
+//		System.out.println("========댓글========");
+//	}
 }

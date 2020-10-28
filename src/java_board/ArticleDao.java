@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ArticleDao {
 	// Data Access Object
 
-	private static ArrayList<Article> articles;
+	private ArrayList<Article> articles;
 	private int no = 4;
 
 	public ArticleDao() {
@@ -42,7 +42,7 @@ public class ArticleDao {
 	}
 
 	// Article ver.
-	public static Article getArticleById(int targetId) {
+	public Article getArticleById(int targetId) {
 		for (int i = 0; i < articles.size(); i++) {
 			int id = articles.get(i).getId();
 			if (id == targetId) {
@@ -140,13 +140,13 @@ public class ArticleDao {
 	
 	public void displayAnArticle(Article targetArticle) // 하나출력
 	{
-		
 		System.out.println("번호 : " + targetArticle.getId());
 		System.out.println("제목 : " + targetArticle.getTitle());
 		System.out.println("작성자 : " + targetArticle.getWriter());
 		System.out.println("등록날짜 : " + targetArticle.getDate());
 		System.out.println("조회수 : " + targetArticle.getView());
 		System.out.println("====================");
+		System.out.println("========댓글========");
 	}
 	
 }
