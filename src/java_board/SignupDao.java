@@ -10,6 +10,15 @@ public class SignupDao {
 	public SignupDao()
 	{
 		signup = new ArrayList<Signup>();
+		
+		Signup s1 = new Signup("a","b","c",0);
+		Signup s2 = new Signup("didrudcks","rudcksdid","jake",1);
+		Signup s3 = new Signup("hannah001kr","kr090909","hanna",2);
+		
+		signup.add(s1);
+		signup.add(s2);
+		signup.add(s3);
+		
 	}
 	
 	public void insertSignup(Signup s)
@@ -27,6 +36,20 @@ public class SignupDao {
 	public ArrayList<Signup> getSignup()
 	{
 		return signup;
+	}
+	
+	public boolean checkIfLogin(int find_user)
+	{
+		if(find_user >= 0)
+		{
+			return true;
+		}
+		
+		else
+		{
+			System.out.println("로그인이 필요한 기능입니다.");
+			return false;
+		}
 	}
 	
 //	public String getId()

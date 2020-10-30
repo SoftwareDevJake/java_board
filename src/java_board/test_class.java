@@ -20,5 +20,9 @@ public class test_class {
 		
 		System.out.println(name);
 		
+		int a = Integer.parseInt("123"); // *문자로된 숫자를 완벽한 숫자로 바꿈*
+		
+		System.out.println(a+10);
+		
 	}
 }
