@@ -42,9 +42,10 @@ public class CommentDao {
 	
 	public ArrayList<Comment> getCommentsByParentId(int parentId)
 	{
-		ArrayList<Comment> searchedComments = new ArrayList<>();
+		ArrayList<Comment> searchedComments = new ArrayList<Comment>();
+		ArrayList<Comment> searchComments = getComments();
 		
-		for(int i = 0 ; i < searchedComments.size(); i++)
+		for(int i = 0 ; i < searchComments.size(); i++)
 		{
 			Comment comment = comments.get(i);
 			
