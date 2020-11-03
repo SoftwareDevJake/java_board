@@ -10,14 +10,22 @@ public class Article {
 	private String writer;
 	private int view;
 	private Object date;
-	
+	private int likes;
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 
 	public Article()
 	{
 		
 	}
 	
-	public Article(int id, String title, String body, String writer, int view, Object date)
+	public Article(int id, String title, String body, String writer, int view, Object date, int likes)
 	{
 		this.id = id;
 		this.title = title;
@@ -25,6 +33,7 @@ public class Article {
 		this.writer = writer;
 		this.view = view;
 		this.date = date;
+		this.likes = likes;
 	}
 	
 	public String getWriter() {

@@ -11,9 +11,9 @@ public class SignupDao {
 	{
 		signup = new ArrayList<Signup>();
 		
-		Signup s1 = new Signup("a","b","c",0);
-		Signup s2 = new Signup("didrudcks","rudcksdid","jake",1);
-		Signup s3 = new Signup("hannah001kr","kr090909","hanna",2);
+		Signup s1 = new Signup("a", "b", "c", 0, 0 );
+		Signup s2 = new Signup("didrudcks", "rudcksdid", "jake", 1, 0);
+		Signup s3 = new Signup("hanna001kr", "kr090909", "hanna", 2, 0);
 		
 		signup.add(s1);
 		signup.add(s2);

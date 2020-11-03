@@ -73,6 +73,7 @@ public class App {
 					System.out.println("작성자 : " + article.getWriter());
 					System.out.println("등록날짜 : " + article.getDate());
 					System.out.println("조회수 : " + article.getView());
+					System.out.println("좋아요 : " + article.getLikes());
 //					System.out.println("내용 : " + article.getBody());
 					System.out.println("====================");
 				}
@@ -169,7 +170,25 @@ public class App {
 
 						else if (choice == 2) // 좋아요
 						{
-							System.out.println("[좋아요 기능]");
+							if(s_dao.checkIfLogin(find_user))
+							{
+								if(login.get(find_user).getLikesCount() == 0)
+								{
+									login.get(find_user).setLikesCount(1);
+									System.out.println("해당 게시물을 좋아합니다.");
+									target.setLikes(target.getLikes() + 1);
+									dao.displayAnArticle(target);
+								}
+								
+								else
+								{
+									login.get(find_user).setLikesCount(0);
+									System.out.println("해당 게시물 좋아요를 해지합니다.");
+									target.setLikes(target.getLikes() - 1);
+									dao.displayAnArticle(target);
+								}
+							}
+							
 						}
 
 						else if (choice == 3) // 수정
@@ -189,6 +208,8 @@ public class App {
 								target.setBody(newBody);
 								
 								System.out.println("수정되었습니다.");
+								dao.displayAnArticle(target);
+								c_dao.displayComments(commentArray);
 							}
 							
 							else
@@ -199,13 +220,21 @@ public class App {
 
 						else if (choice == 4) // 삭제
 						{
-							dao.removeArticle(target);
-							System.out.println("삭제되었습니다.");
-							break;
+							if(s.getId().equals(target.getWriter()))
+							{
+								dao.removeArticle(target);
+								System.out.println("삭제되었습니다.");
+								break;
+							}
+							else
+							{
+								System.out.println("자신의 게시물만 수정, 삭제 할 수 있습니다.");
+							}
 						}
 
 						else if (choice == 5) // 뒤로가기
 						{
+							login.get(find_user).setLikesCount(0);
 							break;
 						}
 

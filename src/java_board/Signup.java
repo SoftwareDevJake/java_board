@@ -5,18 +5,28 @@ public class Signup {
 	private String password;
 	private String nickname;
 	private int no;
+	private int likesCount;
 	
 	public Signup()
 	{
 		
 	}
 	
-	public Signup(String id, String password, String nickname, int no)
+	public Signup(String id, String password, String nickname, int no, int likesCount)
 	{
 		this.id = id;
 		this.password = password;
 		this.nickname = nickname;
 		this.no = no;
+		this.likesCount = likesCount;
+	}
+	
+	public int getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(int likesCount) {
+		this.likesCount = likesCount;
 	}
 	
 	public int getNo() {
