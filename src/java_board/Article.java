@@ -1,6 +1,5 @@
+// 데이터 구조화 클래스 - DTO (Data Transfer Object), VO
 package java_board;
-
-import java.util.ArrayList;
 
 public class Article {
 

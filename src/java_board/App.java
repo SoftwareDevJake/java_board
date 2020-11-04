@@ -8,6 +8,7 @@ public class App {
 	SignupDao s_dao = new SignupDao();
 	CommentDao c_dao = new CommentDao();
 	ArticleDao dao = new ArticleDao();
+	LikesDao l_dao = new LikesDao();
 	
 	public void start() {
 		Scanner sc = new Scanner(System.in);
@@ -73,7 +74,8 @@ public class App {
 					System.out.println("작성자 : " + article.getWriter());
 					System.out.println("등록날짜 : " + article.getDate());
 					System.out.println("조회수 : " + article.getView());
-					System.out.println("좋아요 : " + article.getLikes());
+					int likeCount = l_dao.getLikeCount(article.getId());
+					System.out.println("좋아요 : " + likeCount);
 //					System.out.println("내용 : " + article.getBody());
 					System.out.println("====================");
 				}
@@ -136,7 +138,7 @@ public class App {
 					target.setView(target.getView() + 1);
 					ArrayList<Comment> cm = c_dao.getCommentsByParentId(targetId);
 
-					dao.displayAnArticle(target);
+					dao.displayAnArticle(target,l_dao);
 					c_dao.displayComments(cm);
 
 					while (true) {
@@ -163,30 +165,32 @@ public class App {
 	
 								System.out.println("댓글이 등록 되었습니다.");
 	
-								dao.displayAnArticle(target);
+								dao.displayAnArticle(target,l_dao);
 								c_dao.displayComments(commentArray);
 							}
 						}
 
 						else if (choice == 2) // 좋아요
 						{
-							if(s_dao.checkIfLogin(find_user))
+//							Likes like = new Likes(target.getWriter(), login.get(find_user).getId());
+							
+							Likes rst = l_dao.getLikeByArticleIdAndMemberId(target.getId(), login.get(find_user).getId());
+							
+							if(rst == null)
 							{
-								if(login.get(find_user).getLikesCount() == 0)
-								{
-									login.get(find_user).setLikesCount(1);
-									System.out.println("해당 게시물을 좋아합니다.");
-									target.setLikes(target.getLikes() + 1);
-									dao.displayAnArticle(target);
-								}
+								Likes like = new Likes(target.getId(), login.get(find_user).getId());
+								l_dao.insertLikes(like);
 								
-								else
-								{
-									login.get(find_user).setLikesCount(0);
-									System.out.println("해당 게시물 좋아요를 해지합니다.");
-									target.setLikes(target.getLikes() - 1);
-									dao.displayAnArticle(target);
-								}
+								System.out.println("해당 게시물을 좋아요 했습니다.");
+								dao.displayAnArticle(target, l_dao);
+							}
+							
+							else
+							{
+								//해제 - 삭제
+								l_dao.removeLikes(rst);
+								System.out.println("해당 게시물 좋아요를 해제했습니다.");
+								dao.displayAnArticle(target, l_dao);
 							}
 							
 						}
@@ -208,7 +212,7 @@ public class App {
 								target.setBody(newBody);
 								
 								System.out.println("수정되었습니다.");
-								dao.displayAnArticle(target);
+								dao.displayAnArticle(target,l_dao);
 								c_dao.displayComments(commentArray);
 							}
 							
@@ -234,7 +238,6 @@ public class App {
 
 						else if (choice == 5) // 뒤로가기
 						{
-							login.get(find_user).setLikesCount(0);
 							break;
 						}
 
@@ -289,21 +292,12 @@ public class App {
 
 					dao.displayArticles(searchedArticles);
 				}
-
-//				ArrayList<Article> target = dao.getArticles();
-//				int check = 1;
-//
-//				for (int i = 0; i < target.size(); i++) {
-//					if (target.get(i).contains(keyword)) {
-//						System.out.println(target.get(i).getTitle());
-//						check = 2;
-//					}
-//				}
-//				
-//				if(check == 1)
-//				{
-//					System.out.println("검색 결과가 없습니다.");
-//				}
+			}
+			
+			if (cmd.equals("article sort"))
+			{
+				System.out.println("정렬 대상을 선택해주세요. (id : 번호) : ");
+				
 			}
 
 			if (cmd.equals("member signup")) {
@@ -343,16 +337,17 @@ public class App {
 					}
 				}
 
-				if (id.equals(s_dao.getSignup().get(find_user).getId())
+				if(find_user == -1)
+				{
+					System.out.println("아이디와 비밀번호를 다시한번 확인해 주십시오.");
+				}
+				
+				else if (id.equals(s_dao.getSignup().get(find_user).getId())
 						&& password.equals(s_dao.getSignup().get(find_user).getPassword())) 
 				{
 					System.out.println(s_dao.getSignup().get(find_user).getNickname() + "님 환영합니다!");
 					s.setId(s_dao.getSignup().get(find_user).getId());
 				} 
-				else 
-				{
-					System.out.println("아이디와 비밀번호를 다시한번 확인해 주십시오.");
-				}
 			}
 			
 			if(cmd.equals("member logout"))

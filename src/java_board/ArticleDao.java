@@ -8,6 +8,7 @@ public class ArticleDao {
 
 	private ArrayList<Article> articles;
 	private int no = 4;
+	LikesDao likesDao = new LikesDao();
 
 	public ArticleDao() {
 		articles = new ArrayList<>();
@@ -134,19 +135,22 @@ public class ArticleDao {
 			System.out.println("작성자 : " + article.getWriter());
 			System.out.println("등록날짜 : " + article.getDate());
 			System.out.println("조회수 : " + article.getView());
-			System.out.println("좋아요 : " + article.getLikes());
+			int likeCount = likesDao.getLikeCount(article.getId());
+			System.out.println("좋아요 : " + likeCount);
 			System.out.println("====================");
 		}
 	}
 	
-	public void displayAnArticle(Article targetArticle) // 하나출력
+	public void displayAnArticle(Article targetArticle, LikesDao likes) // 하나출력
 	{
 		System.out.println("번호 : " + targetArticle.getId());
 		System.out.println("제목 : " + targetArticle.getTitle());
 		System.out.println("작성자 : " + targetArticle.getWriter());
 		System.out.println("등록날짜 : " + targetArticle.getDate());
 		System.out.println("조회수 : " + targetArticle.getView());
-		System.out.println("좋아요 : " + targetArticle.getLikes());
+		likesDao = likes;
+		int likeCount = likesDao.getLikeCount(targetArticle.getId());
+		System.out.println("좋아요 : " + likeCount);
 		System.out.println("====================");
 		System.out.println("========댓글========");
 	}
