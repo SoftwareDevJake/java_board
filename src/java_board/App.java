@@ -1,6 +1,8 @@
 package java_board;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class App {
@@ -296,7 +298,39 @@ public class App {
 			
 			if (cmd.equals("article sort"))
 			{
-				System.out.println("정렬 대상을 선택해주세요. (id : 번호) : ");
+				// 조회수로 오름차순
+				ArrayList<Article> articles = dao.getArticles();
+				
+				System.out.println("정렬 대상을 선택해주세요. (id : 번호, like : 좋아요, hit : 조회수) : ");
+				String sortType = sc.nextLine();
+				
+				System.out.println("정렬 방법을 선택해주세요. (asc : 오름차순, desc : 내림차순) : ");
+				String sortWay = sc.nextLine();
+				
+				MyComparator comp = new MyComparator();
+				comp.sortWay = sortWay;
+			
+				Collections.sort(articles, comp);
+				dao.displayArticles(articles);
+				
+				
+				
+				
+				
+//				if(sortType.equals("id"))
+//				{
+					
+//					
+					
+//				}
+//				
+//				else if(sortType.equals("like"))
+//				{
+//					
+//				}
+				
+				
+				
 				
 			}
 
@@ -373,6 +407,9 @@ public class App {
 						"member [signup : 회원가입 / signin : 로그인 / findpass : 비밀번호 찾기 /\n findid : 아이디 찾기 / logout : 로그아웃 / myinfo : 나의 정보 확인 및 수정]");
 
 			}
+		
 		}
 	}
+	
+	
 }

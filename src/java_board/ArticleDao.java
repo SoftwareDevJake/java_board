@@ -13,9 +13,9 @@ public class ArticleDao {
 	public ArticleDao() {
 		articles = new ArrayList<>();
 
-		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 0, getCurrentDate(), 0);
-		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 0, getCurrentDate(), 0);
-		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 0, getCurrentDate(), 0);
+		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 100, getCurrentDate(), 24);
+		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 30, getCurrentDate(), 35);
+		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 50, getCurrentDate(), 12);
 
 		articles.add(a1);
 		articles.add(a2);
@@ -136,6 +136,7 @@ public class ArticleDao {
 			System.out.println("등록날짜 : " + article.getDate());
 			System.out.println("조회수 : " + article.getView());
 			int likeCount = likesDao.getLikeCount(article.getId());
+			
 			System.out.println("좋아요 : " + likeCount);
 			System.out.println("====================");
 		}
