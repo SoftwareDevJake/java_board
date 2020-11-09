@@ -6,51 +6,43 @@ import java.util.Scanner;
 public class Test {
 
 	public static void main(String[] args) {
-		
+
 		Scanner sc = new Scanner(System.in);
-		ArrayList list = new ArrayList();
+		ArrayList titles = new ArrayList();
+		ArrayList bodies = new ArrayList();
 		boolean loop = true;
 		Add a = new Add();
-		
-		while(loop)
-		{
+
+		while (loop) {
 			System.out.print("명령어 입력 : ");
-			
+
 			String s = sc.next(); // 입력
-			
-			
-			if(s.equals("add"))
-			{
-				a.add();
+
+			if (s.equals("add")) {
+				a.add(titles, bodies);
 			}
-			
-			else if(s.equals("list"))
-			{
-					
-				System.out.println("제목 : " + a.title);
-				System.out.println("내용 : " + a.body);
+
+			else if (s.equals("list")) {
+				for (int i = 0; i < titles.size(); i++) {
+					System.out.println("제목 : " + titles.get(i));
+					System.out.println("내용 : " + bodies.get(i));
+				}
 			}
-			
-			else if(s.equals("exit"))
-			{
+
+			else if (s.equals("exit")) {
 				Exit e = new Exit();
 				loop = e.exit(s, loop); // 종료
 			}
-			
+
 		}
-		
-		
-		
-		
+
 	}
 
 }
 
 class Exit {
-	boolean exit (String s, boolean loop)
-	{
-		if(s.equals("exit"))
-		{
+	boolean exit(String s, boolean loop) {
+		if (s.equals("exit")) {
 			System.out.println("종료");
 			loop = false;
 		}
@@ -59,27 +51,22 @@ class Exit {
 }
 
 class Add {
-	String title;
-	String body;
 	Scanner sc2 = new Scanner(System.in);
-	
-	void add ()
-	{
+
+	void add(ArrayList titles, ArrayList bodies) {
 		System.out.print("게시물 제목을 입력해주세요 : ");
-		title = sc2.next();
-		
+		titles.add(sc2.next());
+
 		System.out.print("게시물 내용을 입력해주세요 : ");
-		body = sc2.next();
-		
+		bodies.add(sc2.next());
+
 		System.out.println("게시물이 등록 되었습니다.");
 	}
 }
 
 class List {
-	
-	
-	void show_list()
-	{
-		
+
+	void show_list() {
+
 	}
 }
