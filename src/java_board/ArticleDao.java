@@ -16,10 +16,10 @@ public class ArticleDao {
 		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 100, getCurrentDate(), 30);
 		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 30, getCurrentDate(), 20);
 		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 50, getCurrentDate(), 40);
-		Article a4 = new Article(3, "안녕?", "내용4", "1", 40, getCurrentDate(), 15);
-		Article a5 = new Article(3, "안녕하세요?", "내용5", "2", 20, getCurrentDate(), 19);
-		Article a6 = new Article(3, "안녕ㅎㅎ", "내용6", "3", 10, getCurrentDate(), 5);
-		Article a7 = new Article(3, "안녕!", "내용7", "4", 5, getCurrentDate(), 2);
+		Article a4 = new Article(4, "안녕?", "내용4", "1", 40, getCurrentDate(), 15);
+		Article a5 = new Article(5, "안녕하세요?", "내용5", "2", 20, getCurrentDate(), 19);
+		Article a6 = new Article(6, "안녕ㅎㅎ", "내용6", "3", 10, getCurrentDate(), 5);
+		Article a7 = new Article(7, "안녕!", "내용7", "4", 5, getCurrentDate(), 2);
 		
 
 		articles.add(a1);
@@ -164,6 +164,21 @@ public class ArticleDao {
 		System.out.println("========댓글========");
 	}
 	
+	public void displayArticlesByPage(ArrayList<Article> articles, Page p) // 페이지당 출력
+	{
+//		System.out.println("==== " + p.getStartIndex());
+//		System.out.println("==== " + p.getEndIndex());
+		for(int i = p.getStartIndex(); i < p.getEndIndex(); i++)
+		{
+			System.out.println("번호 : " + articles.get(i).getId());
+			System.out.println("제목 : " + articles.get(i).getTitle());
+			System.out.println("작성자 : " + articles.get(i).getWriter());
+			System.out.println("등록날짜 : " + articles.get(i).getDate());
+			System.out.println("조회수 : " + articles.get(i).getView());
+			System.out.println("좋아요 : " + articles.get(i).getLikes()); 
+			System.out.println("====================");	
+		}
+	}
 }
 
 	

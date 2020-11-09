@@ -6,19 +6,22 @@ public class PageDao {
 	
 	private ArrayList<Page> pages;
 	private int no = 5;
-	Page page = new Page();
 	
-	
-	public void pageList()
+	public void pageList(Page page)
 	{
-		for(int i = 0; i < no; i++)
+		for(int i = page.getStartPageNumberInBlock(); i <= page.getEndPageNumberInBlock(); i++)
 		{
 			
-			System.out.println("1 2 3 4 5");
-//			System.out.print("[" + pages.get(i) + "] ");
-			
+			if(i == page.getCurrentPage())
+			{
+				System.out.print("[" + i + "] ");
+			}
+			else
+			{
+				System.out.print(i + " ");
+			}
 		}
-		
+		System.out.println();
 	}
 	
 	public void insertPage(Page p, ArrayList<Article> articles)
@@ -26,7 +29,7 @@ public class PageDao {
 		
 		if(articles.size() > 3)
 		{
-			p.setPage(no);
+			p.setCurrentPage(no);
 			insertPage(p, articles);
 			no++;
 			pages.add(p);

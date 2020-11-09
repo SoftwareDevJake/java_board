@@ -325,14 +325,15 @@ public class App {
 			
 			if(cmd.equals("article page"))
 			{
+				
+				System.out.println("몇번째 페이지를 보시겠습니까 : ");
+				int currentPage = Integer.parseInt(sc.nextLine());
 				ArrayList<Article> articles = dao.getArticles();			
-				p.setCurrentPage(1);
-				p_dao.getCurrentPage(p);
+				p.setCurrentPage(currentPage);
+				p.setTotalCountOfItems(articles.size());
 				
-				p_dao.insertPage(p, articles);
-				
-				dao.displayArticles(articles);
-				p_dao.pageList();
+				dao.displayArticlesByPage(articles,p);
+				p_dao.pageList(p);
 				
 			}
 

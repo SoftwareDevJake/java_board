@@ -1,30 +1,34 @@
 package java_board;
 
+import java.util.Scanner;
+
 public class Page {
 	
-	private int page;
-	private int prev;
-	private int next;
-	private int go;
-	private int back;
 	private int currentPage;
+	private int totalCountOfItems; // 전체 게시물 갯수
+	private int startPage = 1; // 시작 페이지 번호
+	private int itemsCountPerPage = 3; // 페이지당 출력 게시물 갯수
+	private int pageCountPerBlock = 5; // 한 페이지 블럭 당 페이지 개수
 	
-	
-	Page()
+	public int getStartIndex() {
+		
+		return (currentPage - 1) * itemsCountPerPage;
+	}
+
+	public int getEndIndex() {
+		return getStartIndex() + itemsCountPerPage;
+	}
+
+	public Page()
 	{
 		
 	}
 	
-	Page(int page, int prev, int next, int go, int back, int currentPage)
-	{
-		this.page = page;
-		this.prev = prev;
-		this.next = next;
-		this.go = go;
-		this.back = back;
+	public Page(int currentPage, int totalCountOfItems) {
 		this.currentPage = currentPage;
+		this.totalCountOfItems = totalCountOfItems;
 	}
-	
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -32,38 +36,54 @@ public class Page {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
-	
-	public int getPage() {
-		return page;
+
+	public int getTotalCountOfItems() {
+		return totalCountOfItems;
 	}
-	public void setPage(int page) {
-		this.page = page;
+
+	public void setTotalCountOfItems(int totalCountOfItems) {
+		this.totalCountOfItems = totalCountOfItems;
 	}
-	public int getPrev() {
-		return prev;
+
+	public int getStartPage() {
+		return startPage;
 	}
-	public void setPrev(int prev) {
-		this.prev = prev;
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
 	}
-	public int getNext() {
-		return next;
+
+	public int getItemsCountPerPage() {
+		return itemsCountPerPage;
 	}
-	public void setNext(int next) {
-		this.next = next;
+
+	public void setItemsCountPerPage(int itemsCountPerPage) {
+		this.itemsCountPerPage = itemsCountPerPage;
 	}
-	public int getGo() {
-		return go;
+
+	public int getPageCountPerBlock() {
+		return pageCountPerBlock;
 	}
-	public void setGo(int go) {
-		this.go = go;
+
+	public void setPageCountPerBlock(int pageCountPerBlock) {
+		this.pageCountPerBlock = pageCountPerBlock;
 	}
-	public int getBack() {
-		return back;
+
+	public int getEndPage() {
+		return (int)Math.ceil((double)totalCountOfItems / itemsCountPerPage); // 마지막 페이지
 	}
-	public void setBack(int back) {
-		this.back = back;
+
+	public int getCurrentPageBlock() {
+		return (int)Math.ceil((double)currentPage / pageCountPerBlock); // 현재 페이지 블록
 	}
-	
-	
+
+	public int getStartPageNumberInBlock() {
+		return ((getCurrentPageBlock() - 1) * pageCountPerBlock) + 1; // 블럭 당 시작페이지 넘버
+	}
+
+	public int getEndPageNumberInBlock() {
+		return ((getCurrentPageBlock() - 1) * pageCountPerBlock) + 1 + pageCountPerBlock - 1; // 블럭 당 앤드페이지 넘버
+	}
+
 	
 }
