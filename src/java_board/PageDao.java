@@ -9,6 +9,7 @@ public class PageDao {
 	
 	public void pageList(Page page)
 	{
+		
 		for(int i = page.getStartPageNumberInBlock(); i <= page.getEndPageNumberInBlock(); i++)
 		{
 			
@@ -37,12 +38,4 @@ public class PageDao {
 		
 	}
 	
-	public void getCurrentPage(Page p)
-	{
-		int currentPage = p.getCurrentPage();
-		if(p.getCurrentPage() == 1)
-		{
-			System.out.println("[" + currentPage + "]");
-		}
-	}
 }

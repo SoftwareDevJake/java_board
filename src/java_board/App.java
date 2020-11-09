@@ -335,6 +335,27 @@ public class App {
 				dao.displayArticlesByPage(articles,p);
 				p_dao.pageList(p);
 				
+				while(true)
+				{
+					
+					System.out.println("페이징 명령어를 입력해주세요 : ()");
+					String pageCmd = sc.nextLine();
+					
+					if(pageCmd.equals("next"))
+					{
+						p.setCurrentPage(currentPage++);
+						
+						p.setTotalCountOfItems(articles.size());
+						dao.displayArticlesByPage(articles,p);
+						p_dao.pageList(p);
+						
+					}
+					else if(pageCmd.equals("back"))
+					{
+						break;
+					}
+				}
+					
 			}
 
 			if (cmd.equals("member signup")) {
