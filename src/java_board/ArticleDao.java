@@ -12,23 +12,32 @@ public class ArticleDao {
 
 	public ArticleDao() {
 		articles = new ArrayList<>();
-
-		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 100, getCurrentDate(), 30);
-		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 30, getCurrentDate(), 20);
-		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 50, getCurrentDate(), 40);
-		Article a4 = new Article(4, "안녕?", "내용4", "1", 40, getCurrentDate(), 15);
-		Article a5 = new Article(5, "안녕하세요?", "내용5", "2", 20, getCurrentDate(), 19);
-		Article a6 = new Article(6, "안녕ㅎㅎ", "내용6", "3", 10, getCurrentDate(), 5);
-		Article a7 = new Article(7, "안녕!", "내용7", "4", 5, getCurrentDate(), 2);
+		for(int i = 1; i <= 50; i++)
+		{
+			Article a1 = new Article();
+			a1.setId(i);
+			a1.setTitle("제목 : " + i);
+			a1.setBody("내용 : " + i);
+			
+			articles.add(a1);
+		}
 		
-
-		articles.add(a1);
-		articles.add(a2);
-		articles.add(a3);
-		articles.add(a4);
-		articles.add(a5);
-		articles.add(a6);
-		articles.add(a7);
+//		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 100, getCurrentDate(), 30);
+//		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 30, getCurrentDate(), 20);
+//		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 50, getCurrentDate(), 40);
+//		Article a4 = new Article(4, "안녕?", "내용4", "1", 40, getCurrentDate(), 15);
+//		Article a5 = new Article(5, "안녕하세요?", "내용5", "2", 20, getCurrentDate(), 19);
+//		Article a6 = new Article(6, "안녕ㅎㅎ", "내용6", "3", 10, getCurrentDate(), 5);
+//		Article a7 = new Article(7, "안녕!", "내용7", "4", 5, getCurrentDate(), 2);
+//		
+//
+//		articles.add(a1);
+//		articles.add(a2);
+//		articles.add(a3);
+//		articles.add(a4);
+//		articles.add(a5);
+//		articles.add(a6);
+//		articles.add(a7);
 	}
 	
 	public void insertArticle(Article a) {
@@ -168,6 +177,9 @@ public class ArticleDao {
 	{
 //		System.out.println("==== " + p.getStartIndex());
 //		System.out.println("==== " + p.getEndIndex());
+		
+		
+		
 		for(int i = p.getStartIndex(); i < p.getEndIndex(); i++)
 		{
 			System.out.println("번호 : " + articles.get(i).getId());

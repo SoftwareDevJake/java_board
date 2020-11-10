@@ -38,7 +38,7 @@ public class App {
 				break;
 			}
 
-			if (cmd.equals("article add")) {
+			else if (cmd.equals("article add")) {
 
 				if (find_user >= 0) 
 				{
@@ -68,7 +68,7 @@ public class App {
 
 			}
 
-			if (cmd.equals("article list")) {
+			else if (cmd.equals("article list")) {
 				ArrayList<Article> articles = dao.getArticles();
 
 				for (int i = 0; i < articles.size(); i++) {
@@ -84,7 +84,7 @@ public class App {
 				}
 			}
 
-			if (cmd.equals("article update")) {
+			else if (cmd.equals("article update")) {
 
 //				Article ver.
 				System.out.println("수정할 게시물 선택 : ");
@@ -109,7 +109,7 @@ public class App {
 
 			}
 
-			if (cmd.equals("article delete")) {
+			else if (cmd.equals("article delete")) {
 //				ArrayList<Article> articles = dao.getArticles();
 
 				System.out.println("삭제할 게시물 선택 : ");
@@ -126,7 +126,7 @@ public class App {
 
 			}
 
-			if (cmd.equals("article read")) {
+			else if (cmd.equals("article read")) {
 
 				System.out.println("몇번 째 게시물을 보시겠습니까?");
 				int targetId = Integer.parseInt(sc.nextLine());
@@ -257,7 +257,7 @@ public class App {
 				}
 			}
 
-			if (cmd.equals("article search")) {
+			else if (cmd.equals("article search")) {
 
 				System.out.println("검색 항목을 선택해주세요");
 				System.out.println("1. 제목, 2. 내용, 3. 제목 + 내용, 4. 작성자");
@@ -302,7 +302,7 @@ public class App {
 				}
 			}
 			
-			if (cmd.equals("article sort"))
+			else if (cmd.equals("article sort"))
 			{
 				// 조회수로 오름차순
 				ArrayList<Article> articles = dao.getArticles();
@@ -323,13 +323,11 @@ public class App {
 				
 			}
 			
-			if(cmd.equals("article page"))
+			else if(cmd.equals("article page"))
 			{
 				
-				System.out.println("몇번째 페이지를 보시겠습니까 : ");
-				int currentPage = Integer.parseInt(sc.nextLine());
 				ArrayList<Article> articles = dao.getArticles();			
-				p.setCurrentPage(currentPage);
+	
 				p.setTotalCountOfItems(articles.size());
 				
 				dao.displayArticlesByPage(articles,p);
@@ -338,27 +336,55 @@ public class App {
 				while(true)
 				{
 					
-					System.out.println("페이징 명령어를 입력해주세요 : ()");
+					System.out.println("페이징 명령어를 입력해주세요 : ((prev : 이전,  next : 다음, \nprevPage : 이전페이지, nextPage : 다음페이지, \ncount : 페이지당 게시물 수  go : 선택,  back : 뒤로가기)");
 					String pageCmd = sc.nextLine();
 					
 					if(pageCmd.equals("next"))
 					{
-						p.setCurrentPage(currentPage++);
+						p.setCurrentPage(p.getCurrentPage() + 1);
+					}
+					
+					else if(pageCmd.equals("prev"))
+					{
+						p.setCurrentPage(p.getCurrentPage() - 1);
+					}
+					
+					else if(pageCmd.equals("go"))
+					{
+						p.setCurrentPage(Integer.parseInt(sc.nextLine()));
+					}
+					
+					else if(pageCmd.equals("nextPage"))
+					{
+						p.setCurrentPage(p.getStartPageNumberInBlock() + 5);
+					}
+					
+					else if(pageCmd.equals("prevPage"))
+					{
+						p.setCurrentPage(p.getStartPageNumberInBlock() - 5);
+					}
+					
+					else if(pageCmd.equals("count"))
+					{
+						System.out.println("출력할 게시물의 개수를 입력해주세요");
+						int count = Integer.parseInt(sc.nextLine());
 						
-						p.setTotalCountOfItems(articles.size());
-						dao.displayArticlesByPage(articles,p);
-						p_dao.pageList(p);
+						p.setItemsCountPerPage(count);
 						
 					}
+					
 					else if(pageCmd.equals("back"))
 					{
 						break;
 					}
+					
+					dao.displayArticlesByPage(articles,p);
+					p_dao.pageList(p);
 				}
 					
 			}
 
-			if (cmd.equals("member signup")) {
+			else if (cmd.equals("member signup")) {
 //				Signup s = new Signup();
 				System.out.println("==== 회원 가입을 진행합니다 ====");
 				System.out.println("아이디를 입력해주세요 : ");
@@ -378,7 +404,7 @@ public class App {
 				System.out.println("==== 회원가입이 완료되었습니다 ====");
 			}
 
-			if (cmd.equals("member signin")) {
+			else if (cmd.equals("member signin")) {
 //				Signup s = new Signup();
 //				login = s_dao.getSignup();
 
@@ -408,7 +434,7 @@ public class App {
 				} 
 			}
 			
-			if(cmd.equals("member logout"))
+			else if(cmd.equals("member logout"))
 			{
 				if(s_dao.checkIfLogin(find_user))
 				{
@@ -416,7 +442,7 @@ public class App {
 				}
 			}
 			
-			if(cmd.equals("member myinfo"))
+			else if(cmd.equals("member myinfo"))
 			{
 				if(s_dao.checkIfLogin(find_user))
 				{
@@ -425,7 +451,7 @@ public class App {
 				}
 			}
 
-			if (cmd.equals("help")) {
+			else if (cmd.equals("help")) {
 				System.out.println("article [add : 게시물 추가 / list : 게시물 목록 조회 / read : 게시물 조회 / search : 검색]");
 				System.out.println(
 						"member [signup : 회원가입 / signin : 로그인 / findpass : 비밀번호 찾기 /\n findid : 아이디 찾기 / logout : 로그아웃 / myinfo : 나의 정보 확인 및 수정]");

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Page {
 	
-	private int currentPage;
+	private int currentPage = 1;
 	private int totalCountOfItems; // 전체 게시물 갯수
 	private int startPage = 1; // 시작 페이지 번호
 	private int itemsCountPerPage = 3; // 페이지당 출력 게시물 갯수
@@ -24,8 +24,7 @@ public class Page {
 		
 	}
 	
-	public Page(int currentPage, int totalCountOfItems) {
-		this.currentPage = currentPage;
+	public Page(int totalCountOfItems) {
 		this.totalCountOfItems = totalCountOfItems;
 	}
 
@@ -85,5 +84,5 @@ public class Page {
 		return ((getCurrentPageBlock() - 1) * pageCountPerBlock) + 1 + pageCountPerBlock - 1; // 블럭 당 앤드페이지 넘버
 	}
 
-	
+
 }
