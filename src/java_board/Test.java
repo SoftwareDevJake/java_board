@@ -1,11 +1,9 @@
 package java_board;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Test {
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 
 		Scanner sc = new Scanner(System.in);
 		ArrayList titles = new ArrayList();
@@ -68,5 +66,11 @@ class List {
 
 	void show_list() {
 
+=======
+
+		App app = new App();
+		
+		app.start();
+>>>>>>> 04b9716740abd206a9ca8e35005dff63d875ecef
 	}
 }
