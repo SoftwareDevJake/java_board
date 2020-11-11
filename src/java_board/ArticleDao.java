@@ -1,7 +1,13 @@
 package java_board;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import org.json.simple.JSONObject;
 
 public class ArticleDao {
 	// Data Access Object
@@ -11,26 +17,26 @@ public class ArticleDao {
 	LikesDao likesDao = new LikesDao();
 
 	public ArticleDao() {
-		articles = new ArrayList<>();
-		for(int i = 1; i <= 50; i++)
-		{
-			Article a1 = new Article();
-			a1.setId(i);
-			a1.setTitle("제목 : " + i);
-			a1.setBody("내용 : " + i);
-			
-			articles.add(a1);
-		}
+//		articles = new ArrayList<>();
+//		for(int i = 1; i <= 50; i++)
+//		{
+//			Article a1 = new Article();
+//			a1.setId(i);
+//			a1.setTitle("제목 : " + i);
+//			a1.setBody("내용 : " + i);
+//			
+//			articles.add(a1);
+//		}
 		
-//		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 100, getCurrentDate(), 30);
-//		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 30, getCurrentDate(), 20);
-//		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 50, getCurrentDate(), 40);
-//		Article a4 = new Article(4, "안녕?", "내용4", "1", 40, getCurrentDate(), 15);
-//		Article a5 = new Article(5, "안녕하세요?", "내용5", "2", 20, getCurrentDate(), 19);
-//		Article a6 = new Article(6, "안녕ㅎㅎ", "내용6", "3", 10, getCurrentDate(), 5);
-//		Article a7 = new Article(7, "안녕!", "내용7", "4", 5, getCurrentDate(), 2);
-//		
-//
+		Article a1 = new Article(1, "안녕하세요.", "내용1", "didrudcks", 100, getCurrentDate(), 30);
+		Article a2 = new Article(2, "반갑습니다.", "내용2", "a", 30, getCurrentDate(), 20);
+		Article a3 = new Article(3, "안녕", "내용3", "hanna001kr", 50, getCurrentDate(), 40);
+		Article a4 = new Article(4, "안녕?", "내용4", "1", 40, getCurrentDate(), 15);
+		Article a5 = new Article(5, "안녕하세요?", "내용5", "2", 20, getCurrentDate(), 19);
+		Article a6 = new Article(6, "안녕ㅎㅎ", "내용6", "3", 10, getCurrentDate(), 5);
+		Article a7 = new Article(7, "안녕!", "내용7", "4", 5, getCurrentDate(), 2);
+		
+
 //		articles.add(a1);
 //		articles.add(a2);
 //		articles.add(a3);
@@ -40,12 +46,60 @@ public class ArticleDao {
 //		articles.add(a7);
 	}
 	
+	public void writeJsonFile(JSONObject jobj)
+	{
+		try {
+			int id = (int)jobj.get("id");
+			String filePath = "C:/test/article_" + id + ".json";
+			
+			String jsonText = jobj.toString();
+			
+			File file = new File("C:/test/article1.json");
+			// 파일 객체 생성
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+
+			if (file.isFile()) {
+				// 쓰기
+				bufferedWriter.write(jsonText);
+
+				bufferedWriter.close();
+
+			}
+
+		}
+
+		catch (IOException e) {
+			System.out.println(e);
+		}
+
+	}
+	
+	public Object articleToJsonObject(Article article)
+	{
+		JSONObject obj = new JSONObject();
+		String jsonText;
+
+		obj.put("id", article.getId());
+		obj.put("title", article.getTitle());
+		obj.put("body", article.getBody());
+		obj.put("writer", article.getWriter());
+		obj.put("view", article.getView());
+		obj.put("like", article.getLikes());
+		obj.put("date", article.getDate());
+		
+		return obj;
+		
+	}
+	
 	public void insertArticle(Article a) {
 		a.setId(no);
 		no++;
 		a.setDate(getCurrentDate());
 
-		articles.add(a);
+		JSONObject jobj = (JSONObject)articleToJsonObject(a);
+		writeJsonFile(jobj);
+		// 파일 저장
+		
 
 	}
 	
